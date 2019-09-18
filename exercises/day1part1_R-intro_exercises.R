@@ -6,70 +6,70 @@
 #### Arithmetic ####
 
 # Pick a number; save it as x
-x = 3
+
 
 # Multiply x by 3
-y = x*3
+
 
 # Take the log of the above (Hint, you need the function log() here)
-z = log(y)
+
 
 # Subtract 4 from the above
-w = z - 4
+
 
 # Square the above
-s = w^2
+
 
 #### Comparisons and Logical Operators ####
 
 # Check if 1 is bigger than 2
 
-1>2
+
 # Check if 1 + 1 is equal to 2
-(1+1)==2
+
 
 # Check if it is true that the strings "eat" and "drink" are not equal to each other
-"eat" !="drink"
+
 
 # Check if it is true that 1 is equal to 1 *AND* 1 is equal to 2 
 # (Hint: remember what the operators & and | do)
-(1 == 1) & (1 ==2)
+
 
 # Check if it is true that 1 is equal to 1 *OR* 1 is equal to 2
-(1 == 1) | (1 == 2)
+
 
 #### Packages and Functions ####
 
 # Load the package tidyverse
-library(tidyverse)
+
 
 # Open the help file for the function recode 
 # (Hint: remember what ? does)
-?recode
+
 
 #### REVIEW: DATA STRUCTURES ####
 
 #### Vectors ####
 
 # Run this code to generate variables x1 and x2
-set.seed(1234) # guarantee all get the same ramdon number
+set.seed(1234)
 x1 <- rnorm(5)
 x2 <- rnorm(20, mean=0.5)
 
 # Select the 3rd element in x1
-x1[3]
+
 
 # Select the elements of x1 that are less than 0
-x1[x1<0]
+
 
 # Select the elements of x2 that are greater than 1
-x2[x2>1]
+
 
 # Create x3 containing the first five elements of x2
-x3 = x2[1:5]
+
 
 # Select all but the third element of x1
-x1[-3]
+
 
 #### Missing values ####
 
@@ -77,10 +77,10 @@ x1[-3]
 vec <- c(1, 8, NA, 7, 3)
 
 # Calculate the mean of vec, excluding the NA value
-mean(vec, na.rm = TRUE)
+
 
 # Count the number of missing values in vec
-sum(is.na(vec))
+
 
 #### Factors ####
 
@@ -112,66 +112,62 @@ mat <- matrix(c(1:51, rep(NA,4)), ncol=5)
 data(mtcars)
 
 # Identify the number of observations (rows) and number of variables (columns)
-dim(mtcars)
-structure(mtcars)
-nrow(mtcars)
-ncol(mtcars)
+
+
 # Identify the names of the variables
-names(mtcars)
+
 
 # Select the variable 'mpg'
-mtcars['mpg']
-mtcars$mpg
+
+
 # Select the 4th row
-mtcars[4,]
+
 
 # Square the value of the 'cyl' variable and store this as a new variable 'cylsq'
-cylsq = (mtcars$cyl)^2 # create a new vector
-mtcars$cylsq = (mtcars$cyl)^2  #create a new column in mtcars
+
 
 #### READING FILES ####
 
 # Check your working directory. It should be the root folder where you downloaded the boot camp materials. If that's not the case, set your working directory accordingly.
-getwd()
-setwd(...)
+
+
 # Read gapminder data with read.csv()
-gapminder <- read.csv("data/gapminder5.csv", sep = "," ,stringsAsFactors=FALSE)
+gapminder <- read.csv("data/gapminder5.csv", stringsAsFactors=FALSE)
 
 # Load the readr package
-library(readr)
+
 
 # Read gapminder data with read_csv()
-gapminder = read_csv("data/gapminder5.csv")
+
 
 #### DATA MANIPULATION ####
 
 #### Exploring data frames ####
 
 # Run summary() on the gapminder data
-summary(gapminder)
+
 
 # Find the mean of the variable pop
-mean(gapminder$pop)
+
 
 # Create a frequency table of the variable 'year'
-# Hint: use table()  default order:alphabet
-table(gapminder$year)
+# Hint: use table()
+
 
 # Create a proportion table of the variable 'continent'
 # Hint: use prop.table()
-prop.table(table(gapminder$continent))
+
 
 #### Subsetting and Sorting ####
 
 # Create a new data frame called gapminder07 contaning only those rows in the gapminder data where year is 2007
-gapminder07 = gapminder[gapminder$year == 2007,]  # !there is a comma
-gapminder07 = subset(gapminder,subset = year ==2007 )
+
 
 # Created a sorted frequency table of the variable continent in gapminder07
-sort(table(gapminder07$continent))
+
 
 # Print out the population of Mexico in 2007
-gapminder07$pop[gapminder07$country =="Mexico"]
+
 
 # BONUS: Print out the rows represnting the 5 countries with the highest population in 2007
 # Hint: Use order(), which we learned about, and head(), which prints out the first 5 rows of a data frame
@@ -199,10 +195,7 @@ table(gapminder07$lifeExp_over70)
 # Try to create a new variable 'lifeExp_highlow' that has the value 
 # "High" when life expectancy is over the mean and the value "Low" 
 # when it is below the mean. When you are done, print a frequency table.
-gapminder07$lifeExp_highlow <- NA  # Initialize a variable containing all "NA" values
-gapminder07$lifeExp_highlow[gapminder07$lifeExp>mean(gapminder07$lifeExp)] <- "High"
-gapminder07$lifeExp_highlow[gapminder07$lifeExp<mean(gapminder07$lifeExp)] <- "Low"
-table(gapminder07$lifeExp_highlow)
+
 
 
 
@@ -212,20 +205,20 @@ table(gapminder07$lifeExp_highlow)
 # Find the mean of life expectancy in 2007 for each continent
 # Hint: use the aggregate() function
 
-aggregate(gapminder07$lifeExp ~ gapminder07$continent, FUN = mean)
+
 #### Statistics, part 1 ####
 
 # Calculate the correlation between 'lifeExp' and 'gdpPercap'.
-cor(gapminder07$lifeExp,gapminder07$gdpPercap)
+
 
 # Use a t-test to evaluate the difference between 'gdpPercap' in "high" and "low" life expectancy countries. Store the results as t1, and then print out t1.
-t = t.test(gapminder07$gdpPercap~gapminder07$lifeExp_highlow)
+
 
 
 #### Statistics, part 2 ####
 
 # Conduct a linear regression predicting 'lifeExp' as a function of 'gdpPercap' and 'pop', and store the results as reg1.
-reg1 = lm(gapminder07$lifeExp ~ gapminder07$gdpPercap + gapminder07$pop)
+
 
 # Print out reg1.
 
@@ -239,8 +232,7 @@ reg1 = lm(gapminder07$lifeExp ~ gapminder07$gdpPercap + gapminder07$pop)
 
 # Save the gapminder07 data frame as a CSV file using write.csv() in the "data" subfolder within the working directory
 # Set the argument `row.names = FALSE`.
-?write.csv
-write.csv(gapminder07,file = "data/gapminder07.csv", row.names = FALSE)
+
 
 #### Save R objects ####
 
@@ -252,10 +244,9 @@ write.csv(gapminder07,file = "data/gapminder07.csv", row.names = FALSE)
 #### Histograms ####
 
 # Create a histogram of the variable 'lifeExp' in gapminder07
-hist(gapminder07$lifeExp,labels = TRUE)
-?hist
+
+
 # Re-create the histogram with a title and axis labels
-hist(gapminder07$lifeExp,labels = TRUE,main = 'HaHa', xlab = 'lifeExp')
 
 
 # Bonus: Change the `breaks = ` argument from its default setting and see what happens.
@@ -265,9 +256,10 @@ hist(gapminder07$lifeExp,labels = TRUE,main = 'HaHa', xlab = 'lifeExp')
 
 # Create a scatterplot with `lifeExp` on the y-axis and `gdpPercap` on the x-axis.
 
-plot(gapminder07$lifeExp~gapminder07$gdpPercap, main = 'Title2', xlab ='gdpPercap', ylab = 'lifeExp')
+
 # Add a title and axis labels.
 
 
 # Bonus: Add a horizontal line indicating the mean of `lifeExp` onto the plot using `abline()`.
-abline(h = mean(gapminder07$lifeExp))
+
+
